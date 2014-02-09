@@ -1,11 +1,21 @@
+from optparse import OptionParser
 
+parser = OptionParser()
 
+parser.add_option('-m','--meal', dest='meal_input', type="float")
+parser.add_option('-x','--tax', dest='tax_input', type="float"	)
+parser.add_option('-t','--tip', dest='tip_input', type="float", default=15.0)
 
+(options,args)=parser.parse_args()
 
+if not options.meal_input:
+	parser.error ("You forgot to enter meal cost")
+if not options.tax_input:
+	parser.error ("You forgot to enter tax rate")
 
-meal = float(raw_input ("Enter the cost of the meal "))
-tax = float(raw_input ("Enter the tax percentage "))/100
-tip = float(raw_input ("Enter the tip percentage "))/100
+meal = options.meal_input
+tax = options.tax_input/100
+tip = options.tip_input	/100
 
 tax_value = meal * tax
 meal_with_tax = meal + tax_value
